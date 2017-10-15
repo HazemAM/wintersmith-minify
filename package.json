@@ -1,0 +1,17 @@
+{
+  "name": "wintersmith-minifyjs",
+  "version": "0.1.0-alpha.1",
+  "description": "An uglify-js plugin for Wintersmith.",
+  "keywords": [
+    "wintersmith",
+    "plugin",
+    "uglify-js",
+    "minify"
+  ],
+  "author": "Hazem AbuMostafa",
+  "license": "Apache-2.0",
+
+  "dependencies": {
+    "uglify-js": "3.x.x"
+  }
+}
