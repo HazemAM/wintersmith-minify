@@ -41,3 +41,11 @@ Usage
     ```html
     <script src="assets/bundle.js"></script>
     ```
+
+
+License
+========
+
+&copy; Copyright 2017 Hazem AbuMostafa.
+
+This project is subject to the [Apache License, Version 2.0](http://apache.org/licenses/LICENSE-2.0.html).
