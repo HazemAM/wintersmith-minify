@@ -47,7 +47,7 @@ Usage
 
 
 License
-========
+-------
 
 &copy; Copyright 2017 Hazem AbuMostafa.
 
