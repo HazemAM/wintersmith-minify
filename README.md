@@ -1,12 +1,15 @@
 # wintersmith-minifyjs
+
 An [uglify-js](https://github.com/mishoo/UglifyJS2) plugin for [Wintersmith](https://github.com/jnordberg/wintersmith).
+
 
 Installation
 ------------
 
-**Warning:** Early-stage developement. Even repository name could change!
+**Warning:** Early-stage development. Even repository name may change!
 
 The plugin is not published on NPM yet as the name is not final. If you want to use the plugin in this early stage, you could add it as a Git submodule, import it using the Git URI, or make a local fork.
+
 
 Usage
 -----
