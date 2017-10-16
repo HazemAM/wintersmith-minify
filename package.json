@@ -1,7 +1,7 @@
 {
-  "name": "wintersmith-minifyjs",
-  "version": "0.1.0-alpha.1",
-  "description": "An uglify-js plugin for Wintersmith.",
+  "name": "wintersmith-minify",
+  "version": "0.1.0-alpha.2",
+  "description": "A minifier plugin for Wintersmith.",
   "keywords": [
     "wintersmith",
     "plugin",
