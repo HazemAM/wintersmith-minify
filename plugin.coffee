@@ -1,10 +1,11 @@
 uglify = require 'uglify-js'
+CleanCSS = require 'clean-css'
 fs = require 'fs'
 path = require 'path'
 
 module.exports = (env, callback) ->
 
-  class MinifyJsFile extends env.ContentPlugin
+  class MinifyFile extends env.ContentPlugin
     constructor: (@filepath) ->
 
     getFilename: ->
@@ -12,7 +13,8 @@ module.exports = (env, callback) ->
 
     getView: -> (env, locals, contents, templates, callback) ->
       filepath = @filepath
-      env.logger.verbose "MinifyJS: Loading MinifyJS config from #{@filepath.relative}"
+      fileType = @getFilename().split('.').pop()
+      env.logger.verbose "Minify: Loading Minify config from #{@filepath.relative}"
       
       fs.readFile @filepath.full, (error, buffer) ->
         if error
@@ -21,21 +23,21 @@ module.exports = (env, callback) ->
           options = JSON.parse buffer.toString()
           basePath = path.normalize path.dirname filepath.full
           
-          env.logger.verbose "MinifyJS: Loading scripts from #{basePath}"
+          env.logger.verbose "Minify: Loading scripts from #{basePath}"
           pathList = (path.join(basePath, item) for item in options.input)
-            
-          minifyInput = {}
-          for item, i in options.input
-            minifyInput[item] = fs.readFileSync pathList[i], 'utf8'
               
           try
-            result = uglify.minify minifyInput
-            callback null, Buffer result.code
+            if fileType is 'js'
+              result = uglify.minify pathList, {compress: false}
+              callback null, Buffer result.code
+            else if fileType is 'css'
+              result = new CleanCSS({root: basePath}).minify options.input
+              callback null, Buffer result.styles
           catch error
             callback error
 
-  MinifyJsFile.fromFile = (filepath, callback) ->
-    callback null, new MinifyJsFile filepath
+  MinifyFile.fromFile = (filepath, callback) ->
+    callback null, new MinifyFile filepath
 
-  env.registerContentPlugin 'minifyjs', '**/*.js.minify.json', MinifyJsFile
+  env.registerContentPlugin 'minify', '**/*.*.minify.json', MinifyFile
   callback()

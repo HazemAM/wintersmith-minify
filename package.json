@@ -6,12 +6,14 @@
     "wintersmith",
     "plugin",
     "uglify-js",
+    "clean-css",
     "minify"
   ],
   "author": "Hazem AbuMostafa",
   "license": "Apache-2.0",
 
   "dependencies": {
-    "uglify-js": "3.x.x"
+    "uglify-js": "3.x.x",
+    "clean-css": "4.x.x"
   }
 }
