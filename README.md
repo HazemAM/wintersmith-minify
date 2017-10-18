@@ -1,6 +1,6 @@
 # wintersmith-minify
 
-An minifier plugin for [Wintersmith](https://github.com/jnordberg/wintersmith).
+A CSS ([clean-css](https://github.com/jakubpawlowicz/clean-css)) and JavaScript ([UglifyJS](https://github.com/mishoo/UglifyJS2)) minifier plugin for [Wintersmith](https://github.com/jnordberg/wintersmith).
 
 
 Installation
@@ -25,13 +25,25 @@ Usage
       * `<filetype>` is the file extension (either `js` or `css` for now).
 
 
-2.  In this file, make a list of the files you want to minify in an `input` property, e.g.:
+2.  In this file, make a list of the files you want to minify in an `input` property.
+    
+    For instance, in `bundle.js.minify.json`:
     
     ```json
     {
       "input": [
-          "script-x.js",
-          "../directory/script-y.js"
+          "other-script.js",
+          "../src/main.js"
+      ]
+    }
+    ```
+    And in `bundle.css.minify.json`:
+    
+    ```json
+    {
+      "input": [
+          "normalize.css",
+          "../src/main.css"
       ]
     }
     ```
@@ -39,12 +51,13 @@ Usage
     **Side note:** If you want your source files not to be included and accessible in Wintersmith builds, you must place them outside the `contents` folder.
 
 
-3.  Put the `*.*.minify.json` file in the path you want your minified file to be in, e.g. `contents/assets/bundle.js.minify.json`.
+3.  Put every `*.*.minify.json` file in the path you want your minified file to be in, e.g. `contents/script/bundle.js.minify.json`, and `contents/style/bundle.css.minify.json`.
 
 
 4.  Use the minified file in your project without the postfix, e.g.:
     ```html
-    <script src="assets/bundle.js"></script>
+    <link rel="stylesheet" href="style/bundle.css"/>
+    <script src="script/bundle.js"></script>
     ```
 
 
