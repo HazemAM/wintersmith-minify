@@ -31,7 +31,14 @@ module.exports = (env, callback) ->
               result = uglify.minify pathList, {compress: false}
               callback null, Buffer result.code
             else if fileType is 'css'
-              result = new CleanCSS({root: basePath}).minify options.input
+              # Use provided settings, if any, and define the root path:
+              options.settings = options.settings or env.config.minify?.css
+              if options.settings
+                options.settings.root = basePath
+              else
+                options.settings = {root: basePath}
+                
+              result = new CleanCSS(options.settings).minify options.input
               callback null, Buffer result.styles
           catch error
             callback error
