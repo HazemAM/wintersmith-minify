@@ -32,13 +32,13 @@ module.exports = (env, callback) ->
               callback null, Buffer result.code
             else if fileType is 'css'
               # Use provided settings, if any, and define the root path:
-              options.settings = options.settings or env.config.minify?.css
-              if options.settings
-                options.settings.root = basePath
-              else
-                options.settings = {root: basePath}
+              options.settings = options.settings or env.config.minify?.css or {}
                 
-              result = new CleanCSS(options.settings).minify options.input
+              # Normalize paths:
+              inputPaths = for inputPath in options.input
+                path.resolve basePath, inputPath
+
+              result = new CleanCSS(options.settings).minify inputPaths
               callback null, Buffer result.styles
           catch error
             callback error
